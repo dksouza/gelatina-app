@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocolo Gelatina</title>
+    <!-- Modern Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- LOGIN SCREEN -->
+    <div id="login-view" class="view active">
+        <div class="circle-blob blob-1"></div>
+        <div class="circle-blob blob-2"></div>
+
+        <div class="login-card glassmorphism">
+            <h1 class="logo-title">PROTOCOLO<br>GELATINA</h1>
+            <p class="subtitle">¡Enhorabuena, accede a tu app ahora!</p>
+            <button id="btn-entrar" class="primary-btn">Entrar</button>
+        </div>
+    </div>
+
+    <!-- MAIN APP SCREEN -->
+    <div id="app-view" class="view">
+        <!-- Mobile Sidebar Overlay -->
+        <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+        <!-- Sidebar Navigation -->
+        <aside class="app-sidebar glassmorphism-sidebar">
+            <div class="sidebar-brand">
+                <h2 class="sidebar-title">Módulos</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-btn active" id="btn-inicio">Inicio</button>
+                <div class="nav-divider" style="height: 1px; background: rgba(255,255,255,0.1); margin: 0.5rem 0;">
+                </div>
+                <button class="nav-btn module-btn" data-url="https://protocolo-gelatina-f9gvv18.gamma.site/">Protocolo
+                    Gelatina</button>
+                <button class="nav-btn module-btn" data-url="https://protocolo-gelatina-f9gvv18.gamma.site/">Módulo
+                    2</button>
+                <button class="nav-btn module-btn" data-url="https://protocolo-gelatina-f9gvv18.gamma.site/">Módulo
+                    3</button>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="app-main">
+            <header class="app-header glassmorphism-header">
+                <div class="header-left">
+                    <button id="mobile-menu-btn" class="icon-btn" aria-label="Toggle Menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                    <h2 id="current-module-title">Inicio</h2>
+                </div>
+                <button id="btn-salir" class="secondary-btn">Salir</button>
+            </header>
+
+            <main class="app-content">
+                <div id="welcome-screen" class="welcome-screen active">
+                    <div class="welcome-card glassmorphism">
+                        <h2>¡Hola! Te damos la bienvenida</h2>
+                        <p class="welcome-text">Por favor, selecciona un módulo del menú para comenzar tu aprendizaje.
+                        </p>
+                        <div class="coming-soon-badge">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span>Nuevos contenidos serán añadidos muy pronto</span>
+                        </div>
+                    </div>
+                </div>
+
+                <iframe id="content-frame" src="" frameborder="0" allowfullscreen title="Módulo" class="hidden">
+                </iframe>
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>
