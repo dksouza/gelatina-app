@@ -66,7 +66,18 @@
                     </button>
                     <h2 id="current-module-title">Inicio</h2>
                 </div>
-                <button id="btn-salir" class="secondary-btn">Salir</button>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <button class="primary-btn module-btn header-calc-btn" data-url="calculadora.html"
+                        style="padding: 0.5rem 1rem; font-size: 0.9rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; white-space: nowrap; width: auto; box-shadow: 0 4px 10px rgba(139, 92, 246, 0.4);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        Calculadora
+                    </button>
+                    <button id="btn-salir" class="secondary-btn">Salir</button>
+                </div>
             </header>
 
             <main class="app-content">
@@ -75,6 +86,18 @@
                         <h2>¡Hola! Te damos la bienvenida</h2>
                         <p class="welcome-text">Por favor, selecciona un módulo del menú para comenzar tu aprendizaje.
                         </p>
+
+                        <button class="primary-btn module-btn" data-url="calculadora.html"
+                            style="margin-bottom: 2rem; max-width: 300px; display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; font-size: 1rem;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            Calculadora de Horario Ideal
+                        </button>
+
                         <div class="coming-soon-badge">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

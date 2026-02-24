@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Horario Ideal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --text-color: #334155;
+            --primary-color: #10b981;
+            --primary-hover: #059669;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --warning-color: #f59e0b;
+            --font-main: 'Outfit', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        p.subtitle {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        input[type="time"] {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: var(--font-main);
+            color: var(--text-color);
+            outline: none;
+            transition: border-color 0.3s;
+            cursor: pointer;
+        }
+
+        input[type="time"]:focus {
+            border-color: var(--primary-color);
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: var(--font-main);
+            transition: background 0.3s, transform 0.1s;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #475569;
+            display: none;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        .result-box {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 12px;
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            display: none;
+        }
+
+        .result-box.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .result-box h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .message-success {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 0.5rem;
+            display: block;
+        }
+
+        .message-warning {
+            color: var(--warning-color);
+            font-weight: 600;
+            margin-top: 0.5rem;
+            display: block;
+        }
+
+        .timer-display {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 1rem 0;
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Calculadora de Horario Ideal</h1>
+        <p class="subtitle">Descubre el mejor momento según tu rutina diaria</p>
+
+        <div class="form-group">
+            <label for="wake-time">Horario en que despiertas:</label>
+            <input type="time" id="wake-time" required>
+        </div>
+
+        <div class="form-group">
+            <label for="meal-time">Horario de la primera comida:</label>
+            <input type="time" id="meal-time" required>
+        </div>
+
+        <button id="calc-btn" class="btn-primary">Calcular Horario</button>
+
+        <div id="result" class="result-box">
+            <h3 id="recommendation"></h3>
+            <p id="wait-time"></p>
+            <span id="msg-status"></span>
+        </div>
+
+        <div id="timer-display" class="timer-display">30:00</div>
+        <button id="timer-btn" class="btn-secondary">Iniciar Temporizador</button>
+    </div>
+
+    <script>
+        const wakeTimeInput = document.getElementById('wake-time');
+        const mealTimeInput = document.getElementById('meal-time');
+        const calcBtn = document.getElementById('calc-btn');
+        const resultBox = document.getElementById('result');
+        const recommendationEl = document.getElementById('recommendation');
+        const waitTimeEl = document.getElementById('wait-time');
+        const msgStatusEl = document.getElementById('msg-status');
+        const timerDisplay = document.getElementById('timer-display');
+        const timerBtn = document.getElementById('timer-btn');
+
+        let timerInterval;
+
+        calcBtn.addEventListener('click', () => {
+            const wakeVal = wakeTimeInput.value;
+            const mealVal = mealTimeInput.value;
+
+            if (!wakeVal || !mealVal) {
+                alert("Por favor, completa ambos horarios.");
+                return;
+            }
+
+            const getMinutes = (timeStr) => {
+                const [h, m] = timeStr.split(':').map(Number);
+                return h * 60 + m;
+            };
+
+            let wakeMins = getMinutes(wakeVal);
+            let mealMins = getMinutes(mealVal);
+
+            if (mealMins < wakeMins) {
+                mealMins += 24 * 60;
+            }
+
+            const diff = mealMins - wakeMins;
+            const formatTime = (totalMins) => {
+                const normalized = totalMins % (24 * 60);
+                const h = Math.floor(normalized / 60).toString().padStart(2, '0');
+                const m = (normalized % 60).toString().padStart(2, '0');
+                return `${h}:${m}`;
+            };
+
+            const idealMins = wakeMins + 15;
+            const idealTimeStr = formatTime(idealMins);
+            let waitBeforeMeal = mealMins - idealMins;
+
+            recommendationEl.textContent = `Horario recomendado: ${idealTimeStr}`;
+
+            msgStatusEl.className = '';
+            if (diff < 45) {
+                waitTimeEl.textContent = "El tiempo entre despertar y comer es muy corto.";
+                msgStatusEl.textContent = "⚠ Ajusta tu rutina para mejores resultados";
+                msgStatusEl.classList.add('message-warning');
+            } else {
+                waitTimeEl.textContent = `Tiempo de espera antes de comer: ${waitBeforeMeal} minutos.`;
+                msgStatusEl.textContent = "✔ Horario adecuado";
+                msgStatusEl.classList.add('message-success');
+            }
+
+            resultBox.classList.add('active');
+            timerBtn.style.display = 'block';
+            resetTimer();
+        });
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerDisplay.style.display = 'none';
+            timerDisplay.textContent = '30:00';
+            timerBtn.textContent = 'Iniciar Temporizador';
+            timerBtn.disabled = false;
+        }
+
+        timerBtn.addEventListener('click', () => {
+            if (timerDisplay.style.display === 'block') return;
+
+            timerDisplay.style.display = 'block';
+            timerBtn.disabled = true;
+
+            let timeLeft = 30 * 60;
+
+            const updateDisplay = () => {
+                const m = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+                const s = (timeLeft % 60).toString().padStart(2, '0');
+                timerDisplay.textContent = `${m}:${s}`;
+            };
+
+            updateDisplay();
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateDisplay();
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerDisplay.textContent = "00:00";
+                    alert("Ya puedes continuar con tu rutina.");
+                    timerBtn.textContent = 'Temporizador finalizado';
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+
+</html>
