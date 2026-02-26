@@ -186,61 +186,7 @@ html {
     /* Sidebar layout */
 }
 
-/* Sidebar */
-.app-sidebar {
-    width: 260px;
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-right: 1px solid var(--card-border);
-    display: flex;
-    flex-direction: column;
-    padding: 2rem 1.5rem;
-    z-index: 10;
-}
 
-.sidebar-title {
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: var(--text-primary);
-    margin-bottom: 2.5rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-.sidebar-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.nav-btn {
-    background: transparent;
-    color: var(--text-secondary);
-    border: none;
-    padding: 1rem 1.2rem;
-    text-align: left;
-    font-size: 1rem;
-    font-weight: 500;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: inherit;
-    display: flex;
-    align-items: center;
-}
-
-.nav-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-primary);
-}
-
-.nav-btn.active {
-    background: var(--accent);
-    color: white;
-    font-weight: 600;
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
-}
 
 /* App Main Area */
 .app-main {
@@ -302,11 +248,13 @@ html {
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.4s ease;
     z-index: 5;
+    overflow-y: auto;
+    padding: 2rem 1rem 4rem 1rem;
 }
 
 .welcome-screen.active {
@@ -319,7 +267,9 @@ html {
     flex-direction: column;
     align-items: center;
     padding: 3rem;
-    max-width: 500px;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
     animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -365,8 +315,7 @@ html {
     color: var(--text-primary);
     border: none;
     cursor: pointer;
-    display: none;
-    /* Hidden by default on desktop */
+    display: flex;
     padding: 0.5rem;
     border-radius: 8px;
     align-items: center;
@@ -374,29 +323,110 @@ html {
     transition: background 0.3s ease;
 }
 
-.icon-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
+/* Modules Grid */
+.modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    margin-top: 2rem;
 }
 
-/* Sidebar Overlay */
-.sidebar-overlay {
+.module-block {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.module-block::before {
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    z-index: 15;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, transparent 100%);
     opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease;
+    z-index: 0;
 }
 
-.sidebar-overlay.active {
+.module-icon {
+    background: rgba(139, 92, 246, 0.15);
+    color: #c4b5fd;
+    padding: 1rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.module-info {
+    z-index: 1;
+}
+
+.module-block h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.5px;
+}
+
+.module-block p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.module-block:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(139, 92, 246, 0.4);
+    box-shadow: 0 15px 30px -10px rgba(139, 92, 246, 0.4);
+}
+
+.module-block:hover::before {
     opacity: 1;
-    pointer-events: all;
+}
+
+.module-block:hover .module-icon {
+    background: var(--accent);
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Calculator Highlight Style */
+.module-calc {
+    background: linear-gradient(145deg, rgba(236, 72, 153, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+    border-color: rgba(236, 72, 153, 0.3);
+}
+
+.module-calc::before {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.3) 0%, rgba(139, 92, 246, 0.3) 100%);
+}
+
+.module-calc .module-icon {
+    background: linear-gradient(135deg, #ec4899, #8b5cf6);
+    color: white;
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+}
+
+.module-calc:hover {
+    border-color: rgba(236, 72, 153, 0.6);
+    box-shadow: 0 15px 30px -10px rgba(236, 72, 153, 0.5);
 }
 
 
@@ -423,23 +453,8 @@ html {
         height: 200px;
     }
 
-    /* App View Responsiveness */
-    .app-sidebar {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        transform: translateX(-100%);
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 20;
-    }
-
-    .app-sidebar.active {
-        transform: translateX(0);
-    }
-
-    .icon-btn {
-        display: flex;
+    .modules-grid {
+        grid-template-columns: 1fr;
     }
 
     .glassmorphism-header h2 {

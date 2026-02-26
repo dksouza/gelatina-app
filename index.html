@@ -29,83 +29,113 @@
 
     <!-- MAIN APP SCREEN -->
     <div id="app-view" class="view">
-        <!-- Mobile Sidebar Overlay -->
-        <div id="sidebar-overlay" class="sidebar-overlay"></div>
-
-        <!-- Sidebar Navigation -->
-        <aside class="app-sidebar glassmorphism-sidebar">
-            <div class="sidebar-brand">
-                <h2 class="sidebar-title">Módulos</h2>
-            </div>
-            <nav class="sidebar-nav">
-                <button class="nav-btn active" id="btn-inicio">Inicio</button>
-                <div class="nav-divider" style="height: 1px; background: rgba(255,255,255,0.1); margin: 0.5rem 0;">
-                </div>
-                <button class="nav-btn module-btn" data-url="https://protocolo-gelatina-f9gvv18.gamma.site/">Protocolo
-                    Gelatina</button>
-                <button class="nav-btn module-btn"
-                    data-url="https://errores-protocolo-gelati-kiu5r2c.gamma.site/">Módulo
-                    2</button>
-                <button class="nav-btn module-btn" data-url="https://plan-gelatina-7-dias-1stclby.gamma.site/">Módulo
-                    3</button>
-                <button class="nav-btn module-btn" data-url="https://5-recetas-fit-qtubk55.gamma.site/">Bono</button>
-            </nav>
-        </aside>
-
         <!-- Main Content Area -->
         <div class="app-main">
             <header class="app-header glassmorphism-header">
                 <div class="header-left">
-                    <button id="mobile-menu-btn" class="icon-btn" aria-label="Toggle Menu">
+                    <button id="back-btn" class="icon-btn" aria-label="Volver" style="display: none;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="3" y1="12" x2="21" y2="12"></line>
-                            <line x1="3" y1="6" x2="21" y2="6"></line>
-                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
                         </svg>
                     </button>
                     <h2 id="current-module-title">Inicio</h2>
                 </div>
                 <div style="display: flex; gap: 1rem; align-items: center;">
-                    <button class="primary-btn module-btn header-calc-btn" data-url="calculadora.html"
-                        style="padding: 0.5rem 1rem; font-size: 0.9rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; white-space: nowrap; width: auto; box-shadow: 0 4px 10px rgba(139, 92, 246, 0.4);">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <polyline points="12 6 12 12 16 14"></polyline>
-                        </svg>
-                        Calculadora
-                    </button>
                     <button id="btn-salir" class="secondary-btn">Salir</button>
                 </div>
             </header>
 
             <main class="app-content">
                 <div id="welcome-screen" class="welcome-screen active">
-                    <div class="welcome-card glassmorphism">
+                    <div class="welcome-card glassmorphism" style="max-width: 800px; width: 90%; margin: 2rem auto;">
                         <h2>¡Hola! Te damos la bienvenida</h2>
-                        <p class="welcome-text">Por favor, selecciona un módulo del menú para comenzar tu aprendizaje.
+                        <p class="welcome-text">Por favor, selecciona un módulo para comenzar tu aprendizaje.
                         </p>
 
-                        <button class="primary-btn module-btn" data-url="calculadora.html"
-                            style="margin-bottom: 2rem; max-width: 300px; display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; font-size: 1rem;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polyline points="12 6 12 12 16 14"></polyline>
-                            </svg>
-                            Calculadora de Horario Ideal
-                        </button>
-
-                        <div class="coming-soon-badge">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polyline points="12 6 12 12 16 14"></polyline>
-                            </svg>
-                            <span>Nuevos contenidos serán añadidos muy pronto</span>
+                        <div class="modules-grid">
+                            <div class="module-block module-btn module-calc" data-url="calculadora.html"
+                                data-title="Calculadora">
+                                <div class="module-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="module-info">
+                                    <h3>Calculadora de Horario Ideal</h3>
+                                    <p>Descubre el momento perfecto</p>
+                                </div>
+                            </div>
+                            <div class="module-block module-btn"
+                                data-url="https://protocolo-gelatina-f9gvv18.gamma.site/"
+                                data-title="Protocolo Gelatina">
+                                <div class="module-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                                    </svg>
+                                </div>
+                                <div class="module-info">
+                                    <h3>Protocolo Gelatina</h3>
+                                    <p>Tu viaje comienza aquí</p>
+                                </div>
+                            </div>
+                            <div class="module-block module-btn"
+                                data-url="https://errores-protocolo-gelati-kiu5r2c.gamma.site/" data-title="Módulo 2">
+                                <div class="module-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path
+                                            d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                                        <polyline points="14 2 14 8 20 8" />
+                                        <line x1="16" y1="13" x2="8" y2="13" />
+                                        <line x1="16" y1="17" x2="8" y2="17" />
+                                        <line x1="10" y1="9" x2="8" y2="9" />
+                                    </svg>
+                                </div>
+                                <div class="module-info">
+                                    <h3>Módulo 2</h3>
+                                    <p>Profundizando conocimientos</p>
+                                </div>
+                            </div>
+                            <div class="module-block module-btn"
+                                data-url="https://plan-gelatina-7-dias-1stclby.gamma.site/" data-title="Módulo 3">
+                                <div class="module-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                                    </svg>
+                                </div>
+                                <div class="module-info">
+                                    <h3>Módulo 3</h3>
+                                    <p>Avanza al siguiente nivel</p>
+                                </div>
+                            </div>
+                            <div class="module-block module-btn" data-url="https://5-recetas-fit-qtubk55.gamma.site/"
+                                data-title="Bono">
+                                <div class="module-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="20 12 20 22 4 22 4 12" />
+                                        <rect x="2" y="7" width="20" height="5" />
+                                        <line x1="12" y1="22" x2="12" y2="7" />
+                                        <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
+                                        <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
+                                    </svg>
+                                </div>
+                                <div class="module-info">
+                                    <h3>Bono</h3>
+                                    <p>Contenido exclusivo</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

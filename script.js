@@ -5,10 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnEntrar = document.getElementById('btn-entrar');
     const btnSalir = document.getElementById('btn-salir');
 
-    // Module Navigation Elements
-    const navBtns = document.querySelectorAll('.nav-btn');
+    const backBtn = document.getElementById('back-btn');
     const contentFrame = document.getElementById('content-frame');
     const moduleTitle = document.getElementById('current-module-title');
+    const welcomeScreen = document.getElementById('welcome-screen');
+    const moduleBtns = document.querySelectorAll('.module-btn');
 
     // --- Main View Navigation Functions ---
     const goToApp = () => {
@@ -30,81 +31,44 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnEntrar) btnEntrar.addEventListener('click', goToApp);
     if (btnSalir) btnSalir.addEventListener('click', goToLogin);
 
-    // --- Sidebar Module Navigation ---
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const sidebar = document.querySelector('.app-sidebar');
-    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const showWelcomeScreen = () => {
+        moduleTitle.textContent = 'Inicio';
+        contentFrame.classList.add('hidden');
+        if (backBtn) backBtn.style.display = 'none';
 
-    const toggleSidebar = () => {
-        sidebar.classList.toggle('active');
-        sidebarOverlay.classList.toggle('active');
+        // Slight delay before activating welcome screen for smoother transition
+        setTimeout(() => {
+            welcomeScreen.classList.add('active');
+        }, 50);
     };
 
-    const closeSidebar = () => {
-        sidebar.classList.remove('active');
-        sidebarOverlay.classList.remove('active');
-    };
-
-    if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleSidebar);
-    if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
-
-
-    const welcomeScreen = document.getElementById('welcome-screen');
-    const btnInicio = document.getElementById('btn-inicio');
-    const moduleBtns = document.querySelectorAll('.module-btn');
+    if (backBtn) {
+        backBtn.addEventListener('click', showWelcomeScreen);
+    }
 
     // Handle Module clicks
-    moduleBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            // Remove active state from all buttons
-            navBtns.forEach(b => b.classList.remove('active'));
-            // Add active state to the clicked button
-            const targetBtn = e.currentTarget;
-            targetBtn.classList.add('active');
+    if (moduleBtns) {
+        moduleBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const targetBtn = e.currentTarget;
 
-            // Update the header title mapped to the module
-            moduleTitle.textContent = targetBtn.textContent.trim();
+                // Update the header title mapped to the module
+                const title = targetBtn.getAttribute('data-title') || targetBtn.textContent.trim();
+                moduleTitle.textContent = title;
 
-            // Update the iframe source if there is one configured
-            const newUrl = targetBtn.getAttribute('data-url');
-            if (newUrl && contentFrame.src !== newUrl) {
-                // To force a reload even if it is the same link for the illusion of switching:
-                contentFrame.src = newUrl;
-            }
+                // Show back button
+                if (backBtn) backBtn.style.display = 'flex';
 
-            // Hide welcome screen and show iframe
-            welcomeScreen.classList.remove('active');
-            contentFrame.classList.remove('hidden');
+                // Update the iframe source if there is one configured
+                const newUrl = targetBtn.getAttribute('data-url');
+                if (newUrl && contentFrame.src !== newUrl) {
+                    contentFrame.src = newUrl;
+                }
 
-            // Close sidebar on mobile after clicking
-            if (window.innerWidth <= 768) {
-                closeSidebar();
-            }
-        });
-    });
-
-    // Handle Inicio click
-    if (btnInicio) {
-        btnInicio.addEventListener('click', (e) => {
-            // Remove active state from all buttons
-            navBtns.forEach(b => b.classList.remove('active'));
-            // Add active state to Inicio
-            btnInicio.classList.add('active');
-
-            // Update header title
-            moduleTitle.textContent = 'Inicio';
-
-            // Show welcome screen and hide iframe
-            contentFrame.classList.add('hidden');
-            // Slight delay before activating welcome screen for smoother transition
-            setTimeout(() => {
-                welcomeScreen.classList.add('active');
-            }, 50);
-
-            // Close sidebar on mobile after clicking
-            if (window.innerWidth <= 768) {
-                closeSidebar();
-            }
+                // Hide welcome screen and show iframe
+                welcomeScreen.classList.remove('active');
+                contentFrame.classList.remove('hidden');
+            });
         });
     }
 });
